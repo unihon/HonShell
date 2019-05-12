@@ -1,0 +1,5 @@
+#!/bin/bash
+
+NUM=10
+printf "The number: $NUM\n"
+echo $NUM

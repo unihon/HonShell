@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo hello; echo me
+myfile="./demo2"
+
+if [ -x "$myfile" ]; then
+	echo "File $myfile is exists."; cp $myfile ${myfile}.back
+else
+	echo "File $myfile is not exists."; touch $myfile
+fi; echo "bash script end."
+
