@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#gcd 最大公约数
+
+args=2
+error_code=1
+
+#参数个数检查
+if [ $args -ne $# ]
+then
+	echo "`basename $0` 的参数个数不为 $args。"
+	exit $error_code
+fi
+
+if [ $1 -eq 0 -o $2 -eq 0 ]
+then
+	[ $1 -gt $2 ] && zero_res=$1 || zero_res=$2
+	echo "$1 和 $2 的最大公约数为 $zero_res。"
+	exit
+fi
+
+gcd(){
+	div1=$1
+	div2=$2
+	res=1
+	
+	until [ $res -eq 0 ]
+	do
+		res=$(( $div1%$div2 ))
+		div1=$div2
+		div2=$res
+	done
+}
+
+gcd $1 $2
+echo "$1 和 $2 的最大公约数为 $div1。"

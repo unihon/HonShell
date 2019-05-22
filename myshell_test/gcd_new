@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# 更相减损法
+# gcd 最大公约数
+# 判断两个数是否都为偶数
+# 是则，一起约2
+# 相减
+# 结果为 n*2^times
+
+args=2
+error_code=1
+
+# 参数个数检查
+if [ $args -ne $# ]
+then
+	echo "`basename $0` 的参数个数不为 $args。"
+	exit $error_code
+fi
+
+if [ $1 -eq 0 -o $2 -eq 0 ]
+then
+	[ $1 -gt $2 ] && zero_res=$1 || zero_res=$2
+	echo "$1 和 $2 的最大公约数为 $zero_res。"
+	exit
+fi
+
+# 判断两个数是否都为偶数
+testTwo(){
+	[ $(( $1 % 2 )) -eq 0 -a $(( $2 % 2 )) -eq 0 ] && return 0 || return 1 
+}
+
+# 相减
+subTwo(){
+	if [ $1 -gt $2 ]
+	then
+		big=$1
+		small=$2
+	else
+		big=$2
+		small=$1
+	fi
+
+	tmp_res=$(( $big - $small ))
+
+	if [ $tmp_res -eq $small ]
+	then
+		echo $tmp_res
+		return
+	fi
+
+	subTwo $small $tmp_res
+}
+
+main(){
+	a=$1
+	b=$2
+	ts=0
+
+	# 如果是都为偶数，约2，相约次数ts+1
+	while testTwo $a $b
+	do
+		a=$(( $a / 2 ))
+		b=$(( $b / 2 ))
+		(( ts++ ))
+	done
+
+	# 相减
+	sub_res=$(subTwo $a $b)
+
+	# 结算
+	result=$(( $sub_res * 2 ** $ts ))
+}
+
+main $1 $2
+
+echo "$1 和 $2 的最大公约数为 $result。"

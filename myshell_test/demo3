@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo -n "输入一个字符: "
+read a
+
+case "$a" in
+	[[:lower:]]   ) echo "小写";;
+	[[:upper:]]   ) echo "大写";;
+	[0-9]         ) echo "数字";;
+	*             ) echo "其他";;
+esac
+
+exit 0
