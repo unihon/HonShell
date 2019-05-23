@@ -22,6 +22,10 @@ then
 	[ $1 -gt $2 ] && zero_res=$1 || zero_res=$2
 	echo "$1 和 $2 的最大公约数为 $zero_res。"
 	exit
+elif [ $1 -eq $2 ]
+then
+	echo "$1 和 $2 的最大公约数为 $1。"
+	exit
 fi
 
 # 判断两个数是否都为偶数
